@@ -9,7 +9,7 @@ public class Sliding8PuzzleSolver {
 		private int heuristicValue;
 
 		public State() {
-
+			
 		}
 
 		// TODO return anything?
@@ -32,13 +32,13 @@ public class Sliding8PuzzleSolver {
 			 * manhattan distances subtract from goalstate
 			 */
 		}
-
 	}
 
 	public static void main(String args[]) {
-
-		State goalState = new State();
 		
+		Sliding8PuzzleSolver puzzle = new Sliding8PuzzleSolver();
+		State goalState = puzzle.new State();
+
 		// prompt the user to enter their name
 		System.out.print("Enter start state: ");
 
@@ -47,7 +47,8 @@ public class Sliding8PuzzleSolver {
 
 		String startState = null;
 
-		// read the username from the command-line; need to use try/catch with the readLine() method
+		// read the username from the command-line; need to use try/catch with
+		// the readLine() method
 		try {
 			startState = br.readLine();
 		} catch (IOException ioe) {
@@ -65,7 +66,6 @@ public class Sliding8PuzzleSolver {
 		 * 
 		 * startState -> makeBabies loop on priorityQueue makeBabies on each
 		 * check goal
-		 * 
 		 */
 	}
 }
