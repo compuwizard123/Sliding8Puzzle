@@ -16,7 +16,7 @@ public class Sliding8PuzzleSolver {
 		
 		public State(String state, State goalState) {
 			this.state = state;
-			heuristicValue = evaluate(this.state, goalState);
+			heuristicValue = evaluate(goalState);
 		}
 
 		// TODO return anything?
@@ -33,13 +33,16 @@ public class Sliding8PuzzleSolver {
 
 		}
 
-		private int evaluate(String state, State goalState) {
-			/*
-			 * 
-			 * manhattan distances
-			 * subtract from goalstate
-			 */
-			
+		private int evaluate(State goalState) {
+			return manhattanDistanceHeuristic(goalState);
+			//return subtractHeuristic(goalState);
+		}
+		
+		private int manhattanDistanceHeuristic(State goalState) {
+			return 0;
+		}
+		
+		private int subtractHeuristic(State goalState) {
 			return 0;
 		}
 		
