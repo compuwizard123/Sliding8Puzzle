@@ -46,7 +46,15 @@ public class Sliding8PuzzleSolver {
 		}
 		
 		public String toString() {
-			return this.state;
+			char[] temp = this.state.toCharArray();
+			String stateString = "";
+			for(int i = 0; i < 9; i++) {
+				stateString += temp[i] + "\t";
+				if((i+1)%3 == 0) {
+					stateString += "\n";
+				}
+			}
+			return stateString;
 		}
 	}
 
