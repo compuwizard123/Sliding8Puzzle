@@ -39,6 +39,9 @@ public class Sliding8PuzzleSolver {
 		}
 		
 		private int manhattanDistanceHeuristic(State goalState) {
+			char[] temp = this.state.toCharArray();
+			char[] goalStateChar = goalState.getState().toCharArray();
+			
 			return 0;
 		}
 		
@@ -57,6 +60,10 @@ public class Sliding8PuzzleSolver {
 			}
 			stateString += "Heuristic Value - " + this.heuristicValue + "\n";
 			return stateString;
+		}
+		
+		public String getState() {
+			return this.state;
 		}
 	}
 
