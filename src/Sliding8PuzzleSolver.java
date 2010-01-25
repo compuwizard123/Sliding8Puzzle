@@ -7,9 +7,19 @@ public class Sliding8PuzzleSolver {
 
 	public class State {
 		private int heuristicValue;
+		private String state;
 
 		public State() {
 			
+		}
+		
+		public State(String state) {
+			this.state = state;
+		}
+		
+		public State(String state, State goalState) {
+			this.state = state;
+			heuristicValue = evaluate(this.state, goalState);
 		}
 
 		// TODO return anything?
@@ -26,18 +36,24 @@ public class Sliding8PuzzleSolver {
 
 		}
 
-		private void evaluate(long state, long goalState) {
+		private int evaluate(String state, State goalState) {
 			/*
 			 * 
 			 * manhattan distances subtract from goalstate
 			 */
+			
+			return 0;
+		}
+		
+		public String toString() {
+			return this.state;
 		}
 	}
 
 	public static void main(String args[]) {
 		
 		Sliding8PuzzleSolver puzzle = new Sliding8PuzzleSolver();
-		State goalState = puzzle.new State();
+		State goalState = puzzle.new State("123456780");
 
 		// prompt the user to enter their name
 		System.out.print("Enter start state: ");
@@ -55,13 +71,14 @@ public class Sliding8PuzzleSolver {
 			System.out.println("IO error trying to read your name!");
 			System.exit(1);
 		}
+		
 		long startStateInt = new Long(startState);
 		if (startStateInt < 12345678 || startStateInt > 876543210) {
 			throw new IllegalArgumentException();
 		}
 
 		System.out.println(startState);
-
+		System.out.println(goalState.toString());
 		/*
 		 * 
 		 * startState -> makeBabies loop on priorityQueue makeBabies on each
