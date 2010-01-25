@@ -20,7 +20,7 @@ public class Sliding8PuzzleSolver {
 		}
 
 		// TODO return anything?
-		private void makeBabies(long state) {
+		private void makeBabies() {
 			/*
 			 * 
 			 * makes arrayList of babies goes through arraylist discardCopies
@@ -29,7 +29,7 @@ public class Sliding8PuzzleSolver {
 
 		}
 
-		private void discardCopies(long state, ArrayList visited) {
+		private void discardCopies(ArrayList visited) {
 
 		}
 
