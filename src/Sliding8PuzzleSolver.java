@@ -82,8 +82,8 @@ public class Sliding8PuzzleSolver {
 		}
 		
 		long startStateInt = new Long(startStateInput);
-		if (startStateInt < 12345678 || startStateInt > 876543210) {
-			throw new IllegalArgumentException();
+		if (startStateInt < 12345678 || startStateInt > 876543210 || startStateInput.toCharArray().length != 9) {
+			throw new IllegalArgumentException("Illegal Start State");
 		}
 		State startState = puzzle.new State(startStateInput, goalState);
 		
