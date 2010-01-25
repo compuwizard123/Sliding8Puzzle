@@ -8,13 +8,10 @@ public class Sliding8PuzzleSolver {
 	public class State {
 		private int heuristicValue;
 		private String state;
-
-		public State() {
-			
-		}
 		
 		public State(String state) {
 			this.state = state;
+			heuristicValue = 0;
 		}
 		
 		public State(String state, State goalState) {
@@ -39,7 +36,8 @@ public class Sliding8PuzzleSolver {
 		private int evaluate(String state, State goalState) {
 			/*
 			 * 
-			 * manhattan distances subtract from goalstate
+			 * manhattan distances
+			 * subtract from goalstate
 			 */
 			
 			return 0;
