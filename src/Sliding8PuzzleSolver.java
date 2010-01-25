@@ -53,9 +53,9 @@ public class Sliding8PuzzleSolver {
 	public static void main(String args[]) {
 		
 		Sliding8PuzzleSolver puzzle = new Sliding8PuzzleSolver();
-		State goalState = puzzle.new State("123456780");
+		State goalState = puzzle.new State("123456780"); // hardcoded goal state
 
-		// prompt the user to enter their name
+		// prompt the user to enter the start state
 		System.out.print("Enter start state: ");
 
 		// open up standard input
@@ -63,8 +63,7 @@ public class Sliding8PuzzleSolver {
 
 		String startState = null;
 
-		// read the username from the command-line; need to use try/catch with
-		// the readLine() method
+		// get startState from user input
 		try {
 			startState = br.readLine();
 		} catch (IOException ioe) {
