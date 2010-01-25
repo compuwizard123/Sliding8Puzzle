@@ -52,6 +52,7 @@ public class Sliding8PuzzleSolver {
 					stateString += "\n";
 				}
 			}
+			stateString += "Heuristic Value - " + this.heuristicValue + "\n";
 			return stateString;
 		}
 	}
@@ -67,22 +68,23 @@ public class Sliding8PuzzleSolver {
 		// open up standard input
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		String startState = null;
+		String startStateInput = null;
 
 		// get startState from user input
 		try {
-			startState = br.readLine();
+			startStateInput = br.readLine();
 		} catch (IOException ioe) {
 			System.out.println("IO error trying to read your name!");
 			System.exit(1);
 		}
 		
-		long startStateInt = new Long(startState);
+		long startStateInt = new Long(startStateInput);
 		if (startStateInt < 12345678 || startStateInt > 876543210) {
 			throw new IllegalArgumentException();
 		}
-
-		System.out.println(startState);
+		State startState = puzzle.new State(startStateInput, goalState);
+		
+		System.out.println(startState.toString());
 		System.out.println(goalState.toString());
 		/*
 		 * 
