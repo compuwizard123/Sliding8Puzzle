@@ -21,6 +21,10 @@ public class Sliding8PuzzleSolver {
 
 		// TODO return anything?
 		private void makeBabies() {
+			char[] temp = this.state.toCharArray();
+			System.out.println(this.state.indexOf("0"));
+			
+			
 			/*
 			 * 
 			 * makes arrayList of babies goes through arraylist discardCopies
@@ -75,6 +79,10 @@ public class Sliding8PuzzleSolver {
 		
 		public String getState() {
 			return this.state;
+		}
+		
+		public int getHeuristicValue() {
+			return this.heuristicValue;
 		}
 	}
 
