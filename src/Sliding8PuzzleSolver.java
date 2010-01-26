@@ -39,14 +39,25 @@ public class Sliding8PuzzleSolver {
 		}
 		
 		private int manhattanDistanceHeuristic(State goalState) {
-			char[] temp = this.state.toCharArray();
+			int heuristic = 0;
+
 			char[] goalStateChar = goalState.getState().toCharArray();
 			
-			return 0;
+			for(int i = 0; i < 9; i++) {
+				int col = (int) Math.floor(this.state.indexOf(goalStateChar[i])/3);
+				int row = this.state.indexOf(goalStateChar[i])%3;
+				int goalCol = (int) Math.floor(i/3);
+				int goalRow = i%3;
+				heuristic += Math.abs(goalCol - col) + Math.abs(goalRow - row);
+				//System.out.println(goalStateChar[i] + " - (" + goalCol + "," + goalRow + ")" + " - " + "(" + col + "," + row + ")" + " - " + (Math.abs(goalCol - col) + Math.abs(goalRow - row)));
+			}
+			return heuristic;
 		}
 		
 		private int subtractHeuristic(State goalState) {
-			return 0;
+			int stateInt = new Integer(this.state);
+			int goalStateInt = new Integer(goalState.getState());
+			return Math.abs(goalStateInt - stateInt);
 		}
 		
 		public String toString() {
