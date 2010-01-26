@@ -20,10 +20,43 @@ public class Sliding8PuzzleSolver {
 		}
 
 		// TODO return anything?
-		private void makeBabies() {
+		private void makeBabies(State goalState) {
 			char[] temp = this.state.toCharArray();
-			System.out.println(this.state.indexOf("0"));
+			int row = (int) Math.floor(this.state.indexOf("0")/3);
+			int col = this.state.indexOf("0")%3;
 			
+			int count = 0;
+			
+			if((row - 1) > -1) {
+				count++;
+				char[] temp1 = temp.clone();
+				temp1[3*row+col] = temp1[3*(row-1)+col];
+				temp1[3*(row-1)+col] = '0';
+				System.out.println("Baby " + count + "\n" + new State(new String(temp1), goalState).toString());
+			}
+			if((row + 1) < 3) {
+				count++;
+				char[] temp2 = temp.clone();
+				temp2[3*row+col] = temp2[3*(row+1)+col];
+				temp2[3*(row+1)+col] = '0';
+				System.out.println("Baby " + count + "\n" + new State(new String(temp2), goalState).toString());
+			}
+			if((col - 1) > -1) {
+				count++;
+				char[] temp3 = temp.clone();
+				temp3[3*row+col] = temp3[3*(row)+(col-1)];
+				temp3[3*(row)+(col-1)] = '0';
+				System.out.println("Baby " + count + "\n" + new State(new String(temp3), goalState).toString());
+			}
+			if((col + 1) < 3) {
+				count++;
+				char[] temp4 = temp.clone();
+				temp4[3*row+col] = temp4[3*(row)+(col+1)];
+				temp4[3*(row)+(col+1)] = '0';
+				System.out.println("Baby " + count + "\n" + new State(new String(temp4), goalState).toString());
+			}
+			
+			System.out.println("# of babies - " + count + "\n");
 			
 			/*
 			 * 
@@ -112,9 +145,9 @@ public class Sliding8PuzzleSolver {
 			throw new IllegalArgumentException("Illegal Start State");
 		}
 		State startState = puzzle.new State(startStateInput, goalState);
-		
-		System.out.println(startState.toString());
-		System.out.println(goalState.toString());
+		System.out.println("Start State \n" + startState.toString());
+		startState.makeBabies(goalState);
+		System.out.println("Goal State \n" + goalState.toString());
 		/*
 		 * 
 		 * startState -> makeBabies loop on priorityQueue makeBabies on each
