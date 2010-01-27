@@ -72,7 +72,6 @@ public class Testing extends TestCase {
 		Iterator<Sliding8PuzzleSolver.State> i = temp2.iterator();
 		int k = 0;
 		while(i.hasNext()) {
-			//System.out.println(i.next().getState() + " - " + temp[k]);
 			assertEquals(i.next().getState(),temp[k]);
 			k++;
 		}
