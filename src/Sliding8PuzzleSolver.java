@@ -2,29 +2,37 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Sliding8PuzzleSolver {
 
 	public class State {
 		private int heuristicValue;
 		private String state;
+		ArrayList<State> ancestery = new ArrayList<State>();
 		
 		public State(String state) {
 			this.state = state;
-			heuristicValue = 0;
+			this.heuristicValue = 0;
 		}
 		
 		public State(String state, State goalState) {
 			this.state = state;
-			heuristicValue = evaluate(goalState);
+			this.heuristicValue = evaluate(goalState);
+		}
+		
+		public State(String state, State goalState, ArrayList<State> parents) {
+			this.state = state;
+			this.heuristicValue = evaluate(goalState);
+			this.ancestery = parents;
 		}
 
 		// TODO return anything?
-		private void makeBabies(State goalState) {
+		public ArrayList<State> makeBabies(State goalState) {
 			char[] temp = this.state.toCharArray();
 			int row = (int) Math.floor(this.state.indexOf("0")/3);
 			int col = this.state.indexOf("0")%3;
-			
+			ArrayList<State> children = new ArrayList<State>();
 			int count = 0;
 			
 			if((row - 1) > -1) {
@@ -32,31 +40,49 @@ public class Sliding8PuzzleSolver {
 				char[] temp1 = temp.clone();
 				temp1[3*row+col] = temp1[3*(row-1)+col];
 				temp1[3*(row-1)+col] = '0';
-				System.out.println("Baby " + count + "\n" + new State(new String(temp1), goalState).toString());
+				ancestery.add(this);
+				children.add(new State(new String(temp1), goalState, ancestery));
+				//System.out.println("Baby " + count + "\n" + new State(new String(temp1), goalState, ancestery).toString());
 			}
 			if((row + 1) < 3) {
 				count++;
 				char[] temp2 = temp.clone();
 				temp2[3*row+col] = temp2[3*(row+1)+col];
 				temp2[3*(row+1)+col] = '0';
-				System.out.println("Baby " + count + "\n" + new State(new String(temp2), goalState).toString());
+				ancestery.add(this);
+				children.add(new State(new String(temp2), goalState, ancestery));
+				//System.out.println("Baby " + count + "\n" + .toString());
 			}
 			if((col - 1) > -1) {
 				count++;
 				char[] temp3 = temp.clone();
 				temp3[3*row+col] = temp3[3*(row)+(col-1)];
 				temp3[3*(row)+(col-1)] = '0';
-				System.out.println("Baby " + count + "\n" + new State(new String(temp3), goalState).toString());
+				ancestery.add(this);
+				children.add(new State(new String(temp3), goalState, ancestery));
+				//System.out.println("Baby " + count + "\n" + new State(new String(temp3), goalState, ancestery).toString());
 			}
 			if((col + 1) < 3) {
 				count++;
 				char[] temp4 = temp.clone();
 				temp4[3*row+col] = temp4[3*(row)+(col+1)];
 				temp4[3*(row)+(col+1)] = '0';
-				System.out.println("Baby " + count + "\n" + new State(new String(temp4), goalState).toString());
+				ancestery.add(this);
+				children.add(new State(new String(temp4), goalState, ancestery));
+				//System.out.println("Baby " + count + "\n" + new State(new String(temp4), goalState, ancestery).toString());
+			}
+			Iterator<State> i = children.iterator();
+			while(i.hasNext()) {
+				State tempState = i.next();
+				if(tempState.discardCopies()) {
+					i.remove();
+				} else {
+					//System.out.println("Baby \n" + tempState.toString());
+				}
 			}
 			
-			System.out.println("# of babies - " + count + "\n");
+			//System.out.println("# of babies - " + count + "\n");
+			return children;
 			
 			/*
 			 * 
@@ -66,8 +92,14 @@ public class Sliding8PuzzleSolver {
 
 		}
 
-		private void discardCopies(ArrayList visited) {
-
+		private boolean discardCopies() {
+			Iterator<State> i = ancestery.iterator();
+			while(i.hasNext()) {
+				if(this == i.next()) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		private int evaluate(State goalState) {
