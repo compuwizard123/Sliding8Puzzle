@@ -6,79 +6,50 @@ import java.util.Iterator;
 
 import junit.framework.TestCase;
 
+public class Testing extends TestCase
+{
 
-public class Testing extends TestCase {
-	
-	public void testingMake2Babies(){
-		Sliding8PuzzleSolver puzzle = new Sliding8PuzzleSolver();
-		Sliding8PuzzleSolver.State goalState = puzzle.new State("123456780"); // hardcoded goal state
-		
-		String startStateInput = "012345678"; 
-		
-		Sliding8PuzzleSolver.State startState = puzzle.new State(startStateInput, goalState);
-		assertEquals(startState.getState(), startStateInput);
-		String[] temp = new String[2];
-		temp[0] = "312045678";
-		temp[1] = "102345678";
-		
-		ArrayList<Sliding8PuzzleSolver.State> temp2 = startState.makeBabies(goalState);
-		Iterator<Sliding8PuzzleSolver.State> i = temp2.iterator();
-		int k = 0;
-		while(i.hasNext()) {
-			assertEquals(i.next().getState(),temp[k]); 
-			k++;
-		}
-		
+	public void testingMake2Babies()
+	{
+
+		Tray testingTray = new Tray("012345678", null, new ArrayList<String>());
+		testingTray.makeBabies();
+		ArrayList<String> list = testingTray.getBabies();
+
+		assertEquals(list.size(), 2); // 2 children
+		assertEquals("102345678", list.get(0)); // Right Child
+		assertEquals("312045678", list.get(1)); // Bottom Child
+
 	}
-	
-	public void testingMake3Babies(){
-		Sliding8PuzzleSolver puzzle = new Sliding8PuzzleSolver();
-		Sliding8PuzzleSolver.State goalState = puzzle.new State("123456780"); // hardcoded goal state
-		
-		String startStateInput = "102345678"; 
-		
-		Sliding8PuzzleSolver.State startState = puzzle.new State(startStateInput, goalState);
-		assertEquals(startState.getState(), startStateInput);
-		String[] temp = new String[3];
-		temp[0] = "142305678";
-		temp[1] = "012345678";
-		temp[2] = "120345678";
-		
-		ArrayList<Sliding8PuzzleSolver.State> temp2 = startState.makeBabies(goalState);
-		Iterator<Sliding8PuzzleSolver.State> i = temp2.iterator();
-		int k = 0;
-		while(i.hasNext()) {
-			assertEquals(i.next().getState(),temp[k]); 
-			k++;
-		}
-		
+
+	public void testingMake3Babies()
+	{
+
+		Tray testingTray = new Tray("102345678", null, new ArrayList<String>());
+		testingTray.makeBabies();
+		ArrayList<String> list = testingTray.getBabies();
+
+		assertEquals(list.size(), 3); // 3 children
+		assertEquals("012345678", list.get(0)); // Left Child
+		assertEquals("120345678", list.get(1)); // Right Child
+		assertEquals("142305678", list.get(2)); // Bottom Child
 	}
-	
-	public void testingMake4Babies(){
-		Sliding8PuzzleSolver puzzle = new Sliding8PuzzleSolver();
-		Sliding8PuzzleSolver.State goalState = puzzle.new State("123456780"); // hardcoded goal state
-		
-		String startStateInput = "123405678"; 
-		
-		Sliding8PuzzleSolver.State startState = puzzle.new State(startStateInput, goalState);
-		assertEquals(startState.getState(), startStateInput);
-		String[] temp = new String[4];
-		temp[0] = "103425678";
-		temp[1] = "123475608";
-		temp[2] = "123045678";
-		temp[3] = "123450678";
-		
-		ArrayList<Sliding8PuzzleSolver.State> temp2 = startState.makeBabies(goalState);
-		Iterator<Sliding8PuzzleSolver.State> i = temp2.iterator();
-		int k = 0;
-		while(i.hasNext()) {
-			assertEquals(i.next().getState(),temp[k]);
-			k++;
-		}
-		
+
+	public void testingMake4Babies()
+	{
+		Tray testingTray = new Tray("412305678", null, new ArrayList<String>());
+		testingTray.makeBabies();
+		ArrayList<String> list = testingTray.getBabies();
+
+		assertEquals(list.size(), 4); // 4 children
+		assertEquals("412035678", list.get(0)); // Left Child
+		assertEquals("412350678", list.get(1)); // Right Child
+		assertEquals("402315678", list.get(2)); // Top Child
+		assertEquals("412375608", list.get(3)); // Bottom Child
 	}
-	
-	public static void main(String args[]) {
+
+	public static void main(String args[])
+	{
 		junit.swingui.TestRunner.run(Testing.class);
 	}
 }
