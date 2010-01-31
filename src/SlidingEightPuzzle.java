@@ -75,10 +75,11 @@ public class SlidingEightPuzzle
 		// Print solution
 		Iterator<String> solutionIterator = tray.getSolutionPath().iterator();
 		System.out.println("\n");
+		int count = 0;
 		while(solutionIterator.hasNext())
-		{
+		{	
 			char[] temp = solutionIterator.next().toCharArray();
-			String stateString = "";
+			String stateString = "Solution " + count + "\n";
 			for (int i = 0; i < 9; i++)
 			{
 				stateString += temp[i] + "\t";
@@ -88,6 +89,7 @@ public class SlidingEightPuzzle
 				}
 			}
 			System.out.println(stateString);
+			count++;
 			//System.out.println(solutionIterator.next());
 		}
 		System.out.println("\nSolution found in " + (tray.getSolutionPath().size()-1) + " moves.");
