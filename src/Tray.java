@@ -39,8 +39,8 @@ public class Tray implements Comparable<Tray>
 		this.heuristic = this.solutionPath.size();
 
 		// Place calls to various heuristics. Comment out the ones not used.
-//		this.manhattanDistance();
-		this.breadthFirst();
+		this.manhattanDistance();
+//		this.breadthFirst();
 	}
 
 	private void breadthFirst()

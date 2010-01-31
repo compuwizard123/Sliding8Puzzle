@@ -77,7 +77,18 @@ public class SlidingEightPuzzle
 		System.out.println("\n");
 		while(solutionIterator.hasNext())
 		{
-			System.out.println(solutionIterator.next());
+			char[] temp = solutionIterator.next().toCharArray();
+			String stateString = "";
+			for (int i = 0; i < 9; i++)
+			{
+				stateString += temp[i] + "\t";
+				if ((i + 1) % 3 == 0)
+				{
+					stateString += "\n";
+				}
+			}
+			System.out.println(stateString);
+			//System.out.println(solutionIterator.next());
 		}
 		System.out.println("\nSolution found in " + (tray.getSolutionPath().size()-1) + " moves.");
 	}
