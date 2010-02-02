@@ -36,10 +36,8 @@ public class Tray implements Comparable<Tray> {
 		this.heuristic = this.solutionPath.size();
 
 		// Place calls to various heuristics. Comment out the ones not used.
-		this.manhattanDistance(); // Relatively fast, gives near-optimal
-									// solution
-		// this.breadthFirst(); //VERY slow, but gives optimal solution every
-		// time
+		this.manhattanDistance(); // Relatively fast, gives near-optimal solution
+		// this.breadthFirst(); //VERY slow, but gives optimal solution every time
 		// this.subtractLayouts(); //Fast, but gives long solutions
 		// this.outOfPlaceTiles();
 
