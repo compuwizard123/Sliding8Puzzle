@@ -39,10 +39,32 @@ public class Tray implements Comparable<Tray>
 		this.heuristic = this.solutionPath.size();
 
 		// Place calls to various heuristics. Comment out the ones not used.
-		this.manhattanDistance();
-//		this.breadthFirst();
+		this.manhattanDistance();	//Relatively fast, gives near-optimal solution
+//		this.breadthFirst();		//VERY slow, but gives optimal solution every time
+//		this.subtractLayouts();		//Fast, but gives long solutions
+//		this.outOfPlaceTiles();
+		
 	}
 
+	private void outOfPlaceTiles()
+	{
+		char[] goalChars = this.goal.toCharArray();
+		char[] layoutChars = this.layout.toCharArray();
+		
+		for(int i = 0; i < layoutChars.length; i++)
+		{
+			if(goalChars[i] == layoutChars[i])
+			{
+				this.heuristic--;
+			}
+		}
+		
+	}
+
+	private void subtractLayouts()
+	{
+		this.heuristic = this.heuristic + Math.abs(new Integer(this.layout) - new Integer(this.goal));
+	}
 	private void breadthFirst()
 	{
 		// Does Nothing - Heuristic is based on length of path to this case,
@@ -59,11 +81,11 @@ public class Tray implements Comparable<Tray>
 
 		for (int i = 0; i < 9; i++)
 		{
-			int col = (int) Math
-					.floor(this.layout.indexOf(goalStateChar[i]) / 3);
-			int row = this.layout.indexOf(goalStateChar[i]) % 3;
-			int goalCol = (int) Math.floor(i / 3);
-			int goalRow = i % 3;
+			int tempGoalVar = this.layout.indexOf(goalStateChar[i]);
+			int row =  tempGoalVar / 3;
+			int col = tempGoalVar % 3;
+			int goalRow = (i / 3);
+			int goalCol = i % 3;
 			this.heuristic += Math.abs(goalCol - col) + Math.abs(goalRow - row);
 		}
 	}
@@ -89,7 +111,7 @@ public class Tray implements Comparable<Tray>
 		{
 			this.makeLeftBaby();
 		}
-		if ((zeroLocation - 2) % 3 != 0)
+		if ((zeroLocation) % 3 != 2)
 		{
 			this.makeRightBaby();
 		}

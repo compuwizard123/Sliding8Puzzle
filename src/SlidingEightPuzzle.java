@@ -16,6 +16,7 @@ public class SlidingEightPuzzle
 		// prompt the user to enter the start state
 		System.out.print("Enter start state: ");
 
+		long startTime = System.currentTimeMillis();
 		// open up standard input
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String startStateInput = null;
@@ -75,11 +76,10 @@ public class SlidingEightPuzzle
 		// Print solution
 		Iterator<String> solutionIterator = tray.getSolutionPath().iterator();
 		System.out.println("\n");
-		int count = 0;
 		while(solutionIterator.hasNext())
-		{	
+		{
 			char[] temp = solutionIterator.next().toCharArray();
-			String stateString = "Solution " + count + "\n";
+			String stateString = "";
 			for (int i = 0; i < 9; i++)
 			{
 				stateString += temp[i] + "\t";
@@ -88,11 +88,12 @@ public class SlidingEightPuzzle
 					stateString += "\n";
 				}
 			}
-			System.out.println(stateString);
-			count++;
-			//System.out.println(solutionIterator.next());
+			System.out.println(stateString + "\n" + "-------------------\n");
 		}
 		System.out.println("\nSolution found in " + (tray.getSolutionPath().size()-1) + " moves.");
+		
+		long endTime = System.currentTimeMillis();
+		System.out.println("Time taken was " + (endTime-startTime) + " Milliseconds");
 	}
 
 }
