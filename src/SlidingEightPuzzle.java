@@ -32,9 +32,9 @@ public class SlidingEightPuzzle {
 		// Begin the search for the solution
 		String goalString = "123456780";
 		PriorityQueue<Tray> bestHeuristics = new PriorityQueue<Tray>();
+		int queueCount = 0;
 		ArrayList<String> alreadyChecked = new ArrayList<String>();
-		Tray startTray = new Tray(startStateInput, goalString,
-				new ArrayList<String>());
+		Tray startTray = new Tray(startStateInput, goalString, new ArrayList<String>());
 		boolean solutionFound = false;
 
 		// Initialize for first loop through
@@ -51,6 +51,7 @@ public class SlidingEightPuzzle {
 				Tray nextTray = new Tray(babyList.get(i), goalString, new ArrayList<String>(tray.getSolutionPath()));
 				if (!alreadyChecked.contains(nextTray.getLayout())) {
 					bestHeuristics.add(nextTray);
+					queueCount++;
 				}
 			}
 
@@ -81,7 +82,7 @@ public class SlidingEightPuzzle {
 			System.out.println(stateString + "\n" + "-------------------\n");
 		}
 		System.out.println("\nSolution found in "
-				+ (tray.getSolutionPath().size() - 1) + " moves.");
+				+ (tray.getSolutionPath().size() - 1) + " moves.\nThe Priority Queue count was " + queueCount + ".\n");
 
 		// debug for timing heuristics
 		//long endTime = System.currentTimeMillis();
